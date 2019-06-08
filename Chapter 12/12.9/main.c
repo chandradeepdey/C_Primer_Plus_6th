@@ -46,6 +46,7 @@ int main(int argc, char * argv[])
                 /* this string ended, we need a new one */
                 if (temp[end] == '\0') {
                         temp[0] = '\0';
+                        i--;
                         continue;
                 }
 
