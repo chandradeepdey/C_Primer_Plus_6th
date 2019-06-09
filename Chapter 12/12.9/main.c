@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 #include "inputlib.h"
 
 int main(int argc, char * argv[])
@@ -35,43 +36,43 @@ int main(int argc, char * argv[])
                         break;
                 }
 
-                /* after this step, len should contain the
-                 * lenght of the current word, end should contain
-                 * the index just after the end of the current word
+                /* after this step, begin should contain the index of the
+                 * beginning of the current word, end should contain the
+                 * index 1 past the end of the current word.
                  */
-                int len = 0;
+                int begin = 0;
                 int end = 0;
-                while (temp[end] != '\0' && isspace(temp[end]))
+                while (temp[begin] != '\0' && isspace(temp[begin])) {
+                        begin++;
                         end++;
+                }
                 /* this string ended, we need a new one */
                 if (temp[end] == '\0') {
                         temp[0] = '\0';
                         i--;
                         continue;
                 }
-
                 while (temp[end] != '\0' && !isspace(temp[end])) {
-                        len++;
                         end++;
                 }
-                /* create an array of len + 1 elements, extra for null
-                 * character
+
+                /* length of the string is (end - 1) - begin + 1 = end - begin
+                 * create an array of size end - begin + 1, extra to store the
+                 * null character
                  */
-                words[i] = calloc(len + 1, sizeof(*(words[i])));
+                words[i] = calloc(end - begin + 1, sizeof(*(words[i])));
                 if (words[i] == NULL) {
                         fputs("Out of memory!\n", stderr);
                         status = NULL;
                         break;
                 } else {
-                        /* start copying from backwards */
-                        words[i][len] = '\0';
-                        int j = end - 1;
-                        for (len--; len >= 0; len--, j--)
-                                words[i][len] = temp[j];
+                        strncpy(words[i], &temp[begin], end - begin);
+                        words[i][end - begin] = '\0';
 
                         /* move rest of the temp string to front
                          * for further processing
                          */
+                        int j;
                         for (j = 0; temp[end] != '\0'; j++, end++) {
                                 temp[j] = temp[end];
                         }
