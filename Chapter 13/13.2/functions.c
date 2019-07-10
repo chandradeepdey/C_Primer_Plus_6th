@@ -12,8 +12,8 @@
  * returns n if n files are successfully opened before an error occurs
  * returns 0 if no errors occur
  */
-int open_files(int argc, char *restrict argv[], FILE **restrict src,
-                FILE **restrict dest)
+int open_files(int argc, char *restrict argv[restrict], FILE **restrict src,
+FILE **restrict dest)
 {
         if (argc < 3) {
                 fprintf(stderr, "Usage: %s <SOURCE> <DESTINATION>\n", argv[0]);
@@ -28,7 +28,7 @@ int open_files(int argc, char *restrict argv[], FILE **restrict src,
                 return -1;
         } else if (setvbuf(*src, NULL, _IOFBF, BUFSIZE) != 0) {
                 fprintf(stderr, "Error resizing buffer associated with %s\n",
-                                argv[1]);
+                argv[1]);
                 return 1;
         }
 
@@ -37,7 +37,7 @@ int open_files(int argc, char *restrict argv[], FILE **restrict src,
                 return 1;
         } else if (setvbuf(*dest, NULL, _IOFBF, BUFSIZE) != 0) {
                 fprintf(stderr, "Error resizing buffer associated with %s\n",
-                                argv[2]);
+                argv[2]);
                 return 2;
         }
 
