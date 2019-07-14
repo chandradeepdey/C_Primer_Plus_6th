@@ -1,9 +1,5 @@
 #include <stdio.h>
 
-#ifndef __STDC_IEC_559__
-#define __STDC_IEC_559__                // forces the compiler to use IEEE 754 formats
-#endif
-
 int main(void)
 {
         float a = (float) (0x1p128 - 0x1p104);
