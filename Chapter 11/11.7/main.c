@@ -24,7 +24,7 @@ int main(void)
                         for (n = 0; n < SIZE; n++)
                                 array2[n] = '\0';
                         puts("Please enter a positive integer:");
-                        printf("> %zd to quit.\n", strlen(array1) + 1);
+                        printf("> %zu to quit.\n", strlen(array1) + 1);
                 }
                 printf("Please enter a string(%d characters max):\n", SIZE);
                 puts("Empty line to quit.");

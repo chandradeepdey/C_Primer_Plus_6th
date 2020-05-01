@@ -11,7 +11,7 @@ int main(void)
         const char * sort[ROW];
         int choice;
 
-        printf("Enter at most %zd strings:\n", ROW);
+        printf("Enter at most %zu strings:\n", ROW);
         get_input(ROW, COL, input, sort);
         while ((choice = get_choice()) && choice != 5) {
                 process_choice(choice, ROW, COL, input, sort);
